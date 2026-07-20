@@ -55,11 +55,18 @@ export const permissionsMatrix: Record<string, ModulePermissions> = {
     editSelector: 'text="ערוך לוח"',
     requiresRowSelection: false,
   },
+  'Downloads': { 
+    operator: 'RW', admin: 'RW', securityOfficer: 'RW',       
+    url: '/MyDownloads', 
+    screenIdentifierText: 'ההורדות שלי', 
+    editSelector: 'text="delete-button-3"',
+    requiresRowSelection: false,
+  },
+
   // שאר המודולים - עדיין עם ניחושים, לעדכן אחד-אחד באותה שיטה:
   'Recordings':                { operator: 'RO',       admin: 'RW',       securityOfficer: 'RO',       url: '/recordings', screenIdentifierText: 'הקלטות', editSelector: 'TODO' },
   'Protected Records':         { operator: 'DISABLED', admin: 'DISABLED', securityOfficer: 'RW',       url: '/protected-records', screenIdentifierText: 'TODO', editSelector: 'TODO' },
   'Investigation Platform':    { operator: 'RW',       admin: 'RW',       securityOfficer: 'RW',       url: '/investigation', screenIdentifierText: 'TODO', editSelector: 'TODO' },
-  'Downloads':                 { operator: 'RW',       admin: 'RW',       securityOfficer: 'RW',       url: '/downloads', screenIdentifierText: 'TODO', editSelector: 'TODO' },
   'Favorites':                 { operator: 'RW',       admin: 'RW',       securityOfficer: 'RW',       url: '/favorites', screenIdentifierText: 'TODO', editSelector: 'TODO' },
   'Alerts':                    { operator: 'RO',       admin: 'RO',       securityOfficer: 'RO',       url: '/alerts', screenIdentifierText: 'TODO', editSelector: 'TODO' },
   'Settings - General':        { operator: 'RW',       admin: 'RW',       securityOfficer: 'RO',       url: '/settings/general', screenIdentifierText: 'TODO', editSelector: 'TODO' },
@@ -71,7 +78,7 @@ export const permissionsMatrix: Record<string, ModulePermissions> = {
 };
 
 /** מודולים שכבר אומתו מול האתר האמיתי - להרצה ממוקדת בזמן שממשיכים למפות את השאר */
-export const VERIFIED_MODULES = ['Channels', 'Dashboard'];
+export const VERIFIED_MODULES = ['Channels', 'Dashboard', 'Downloads'];
 
 export const ALL_ROLES: Role[] = ['operator', 'admin', 'securityOfficer'];
 export const ALL_MODULES = Object.keys(permissionsMatrix);

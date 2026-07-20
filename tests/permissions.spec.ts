@@ -7,6 +7,8 @@ import {
   PermissionLevel,
   VERIFIED_MODULES,
 } from './permissions-matrix';
+import { testUsers } from './users.fixture';
+import { login, logout } from './login.helper';
 
 // כרגע רצים רק על מודולים שכבר אומתו מול האתר (ר' VERIFIED_MODULES).
 // ברגע שממפים מודול נוסף - מוסיפים את שמו לרשימה ב-permissions-matrix.ts.
@@ -16,7 +18,25 @@ const modulesToTest = Object.entries(permissionsMatrix).filter(([name]) =>
 
 for (const role of ALL_ROLES) {
   test.describe(`הרשאות - ${ROLE_LABELS[role]}`, () => {
-    // משתמשים במצב ההתחברות השמור מ-auth.setup.ts - אין יותר login בכל בדיקה
+    let authPage: any;
+
+    // התחברות פעם אחת בתחילת סדרת בדיקות הזו
+    test.beforeAll(async ({ browser }) => {
+      authPage = await browser.newPage();
+      await login(authPage, testUsers[role]);
+      // שומרים את ה-cookies בקובץ כדי שהבדיקות יוכלו להשתמש בו
+      await authPage.context().storageState({ path: `.auth/${role}.json` });
+    });
+
+    // התנתקות אחרי כל הבדיקות הסתיימו
+    test.afterAll(async () => {
+      if (authPage) {
+        await logout(authPage);
+        await authPage.close();
+      }
+    });
+
+    // משתמשים ב-storageState לכל בדיקה
     test.use({ storageState: `.auth/${role}.json` });
 
     for (const [moduleName, config] of modulesToTest) {
