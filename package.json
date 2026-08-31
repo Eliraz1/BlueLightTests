@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "create-channel": "node ./scripts/create-channel.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

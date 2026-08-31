@@ -55,8 +55,15 @@ export const permissionsMatrix: Record<string, ModulePermissions> = {
     editSelector: 'text="ערוך לוח"',
     requiresRowSelection: false,
   },
+  // 'Recordings': {
+  //   operator: 'RO', admin: 'RW', securityOfficer: 'RO',
+  //   url: '/Recordings',
+  //   screenIdentifierText: 'הקלטות',
+  //   editSelector: 'text="מחיקה"',  //לשנות את הכפתור שיהיה מותאם 
+  //   requiresRowSelection: false,
+  // },
   // שאר המודולים - עדיין עם ניחושים, לעדכן אחד-אחד באותה שיטה:
-  'Recordings':                { operator: 'RO',       admin: 'RW',       securityOfficer: 'RO',       url: '/recordings', screenIdentifierText: 'הקלטות', editSelector: 'TODO' },
+  // 'Recordings':                { operator: 'RO',       admin: 'RW',       securityOfficer: 'RO',       url: '/recordings', screenIdentifierText: 'הקלטות', editSelector: 'TODO' },
   'Protected Records':         { operator: 'DISABLED', admin: 'DISABLED', securityOfficer: 'RW',       url: '/protected-records', screenIdentifierText: 'TODO', editSelector: 'TODO' },
   'Investigation Platform':    { operator: 'RW',       admin: 'RW',       securityOfficer: 'RW',       url: '/investigation', screenIdentifierText: 'TODO', editSelector: 'TODO' },
   'Downloads':                 { operator: 'RW',       admin: 'RW',       securityOfficer: 'RW',       url: '/downloads', screenIdentifierText: 'TODO', editSelector: 'TODO' },

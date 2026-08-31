@@ -32,6 +32,16 @@ npx playwright test permissions
    TEST_ADMIN_PASS=...
    TEST_SECURITY_USER=...
    TEST_SECURITY_PASS=...
+   TEST_CHANNEL_USER=s7001
+   TEST_CHANNEL_PASS=P@ssw0rd
+   CHANNEL_NAME=Auto Channel S7001
+   CHANNEL_URL=http://example.com/stream
+   CHANNEL_MULTICAST_IP=239.0.0.1
+   CHANNEL_MULTICAST_PORT=5000
+   CHANNEL_IP_ADDRESS=192.168.10.5
+   CHANNEL_SITE=TLV
+   CHANNEL_ROOM=חדר 1
+   CHANNEL_ROLE=Operator
    ```
    **לא להעלות את `.env` ל-git!** להוסיף `.env` ל-`.gitignore`.
 

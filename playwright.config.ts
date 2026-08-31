@@ -27,19 +27,31 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: 'https://bl-200.commx.loc',
-    trace: 'on-first-retry',
-    locale: 'he-IL',
-
+  baseURL: 'https://bl-100.commx.loc',
+  ignoreHTTPSErrors: true,          // חסר כרגע, וצריך אותו מול bl-100
+  httpCredentials: {
+    username: process.env.BASIC_AUTH_USER!,
+    password: process.env.BASIC_AUTH_PASS!,
+    send: 'always',                 // שולח את ה-header מיד, בלי לחכות ל-401
+  },
+  trace: 'on-first-retry',
+  locale: 'he-IL',
 },
 
   /* Configure projects for major browsers */
   projects: [
-    // {
-    //   name: 'chromium',
-    //   use: { ...devices['Desktop Chrome'] },
-    // },
+    // מתחבר פעם אחת לכל תפקיד ושומר session ל-.auth/*.json.
+    // רץ אוטומטית לפני chromium, כדי שה-sessions תמיד טריים (הם פגים אחרי ~15-20 דק').
+    {
+      name: 'setup',
+      testMatch: /auth\.setup\.ts/,
+      use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+      dependencies: ['setup'],
+    },
 
     // {
     //   name: 'firefox',
@@ -50,22 +62,9 @@ export default defineConfig({
     //   name: 'webkit',
     //   use: { ...devices['Desktop Safari'] },
     // },
-    {
-    name: 'setup',
-    testMatch: /auth\.setup\.ts/,
-    use: { ...devices['Desktop Edge'], channel: 'msedge' },  // ← השורה החדשה
-  },
-  {
-    name: 'msedge',
-    use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    dependencies: ['setup'],
-  },
 
     /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
+    
     // {
     //   name: 'Mobile Safari',
     //   use: { ...devices['iPhone 12'] },
